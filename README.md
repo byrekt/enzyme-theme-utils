@@ -2,7 +2,7 @@
 # Enzyme Theme Utils
 
 ```sh
-npm install @byrekt/enzyme-theme-utils
+npm install enzyme-theme-utils
 ```
 
 [MIT License](LICENSE.md)
