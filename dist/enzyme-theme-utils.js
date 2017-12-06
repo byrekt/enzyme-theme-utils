@@ -22,6 +22,30 @@ var _extends = Object.assign || function (target) {
   return target;
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+var objectWithoutProperties = function (obj, keys) {
+  var target = {};
+
+  for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;
+    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+    target[i] = obj[i];
+  }
+
+  return target;
+};
+
 function shallowWithTheme(children) {
   var theme = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
@@ -56,8 +80,15 @@ function mountWithTheme(children) {
     context: wrapper.instance().getChildContext()
   });
 
+  var context = options.context,
+      childContextTypes = options.childContextTypes,
+      rest = objectWithoutProperties(options, ['context', 'childContextTypes']);
+
+  var contextObj = _extends({}, wrapper.instance().getChildContext(), context);
+  var childContextTypesObj = _extends({}, styledComponents.ThemeProvider.childContextTypes, childContextTypes);
+  // console.log(contextObj, childContextTypes)
   // Mount the child component with the context
-  return enzyme.mount(themeProvider.instance().props.children, _extends({ context: wrapper.instance().getChildContext(), childContextTypes: styledComponents.ThemeProvider.childContextTypes }, options));
+  return enzyme.mount(themeProvider.instance().props.children, _extends({ context: contextObj, childContextTypes: childContextTypesObj }, rest));
 }
 
 exports.shallowWithTheme = shallowWithTheme;

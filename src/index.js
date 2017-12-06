@@ -32,6 +32,15 @@ export function mountWithTheme (children, theme = {}, options = {}) {
     context: wrapper.instance().getChildContext()
   })
 
+  const { context, childContextTypes, ...rest} = options
+  const contextObj = {
+    ...wrapper.instance().getChildContext(),
+    ...context }
+  const childContextTypesObj = {
+    ...ThemeProvider.childContextTypes,
+    ...childContextTypes
+  }
+  // console.log(contextObj, childContextTypes)
   // Mount the child component with the context
-  return mount(themeProvider.instance().props.children, { context: wrapper.instance().getChildContext(), childContextTypes: ThemeProvider.childContextTypes, ...options })
+  return mount(themeProvider.instance().props.children, { context: contextObj, childContextTypes: childContextTypesObj, ...rest })
 }
