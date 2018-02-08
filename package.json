@@ -1,7 +1,7 @@
 {
   "name": "enzyme-theme-utils",
   "main": "dist/enzyme-theme-utils.js",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Enzyme Theme Utilities",
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/rollup/bin/rollup -c",
@@ -9,6 +9,9 @@
     "clean": "rimraf dist",
     "lint": "eslint ./src",
     "test": "jest"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "license": "MIT",
   "babel": {
@@ -34,8 +37,8 @@
     "styled-components": "^2.2.1"
   },
   "peerDependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "enzyme": "^3.1.0"
   }
 }
