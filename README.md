@@ -26,7 +26,7 @@ const someTheme = {
 
 describe('some themed component', () => {
 
-  it('can be mounted, () => {
+  it('can be mounted', () => {
     const test = mountWithTheme(
       <SomeComponent/>,
       someTheme

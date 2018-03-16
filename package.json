@@ -1,7 +1,7 @@
 {
   "name": "enzyme-theme-utils",
   "main": "dist/enzyme-theme-utils.js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Enzyme Theme Utilities",
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/rollup/bin/rollup -c",
