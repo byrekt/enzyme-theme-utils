@@ -10,6 +10,34 @@ Testing React components that need to be wrapped in a ThemeProvider is a pain in
 
 ## Usage
 
+### shallowWithTheme
+
+```jsx
+import React from 'react'
+import PropTypes from 'prop-types'
+import { shallowWithTheme } from 'enzyme-theme-utils'
+
+const someTheme = {
+  colors: {
+    red: 'red',
+    yellow: 'yellow'
+  }
+}
+
+describe('some themed component', () => {
+
+  it('can be shallow rendered', () => {
+    const test = shallowWithTheme(
+      <SomeComponent/>,
+      someTheme
+    )
+
+    // Assertions
+
+  })
+})
+```
+
 ### mountWithTheme
 
 ```jsx

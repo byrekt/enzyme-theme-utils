@@ -2,21 +2,31 @@
   "env": {
     "test": {
       "presets": [
-        "es2015",
+        "env",
         "stage-0",
         "react"
       ]
     },
-    "production": {
+    "rollup": {
       "presets": [
         [
-          "es2015",
+          "env",
           {
             "modules": false
           }
         ],
         "stage-0",
         "react"
+      ]
+    },
+    "production": {
+      "presets": [
+        "env",
+        "stage-0",
+        "react"
+      ],
+      "ignore": [
+        "**/*.spec.js"
       ]
     }
   }

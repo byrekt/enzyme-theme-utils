@@ -10,13 +10,17 @@ export function shallowWithTheme (children, theme = {}, options = {}) {
     </ThemeProvider>,
     options
   )
-  // Set the context and remount.
-  const themeProvider = wrapper.shallow({
-    context: wrapper.instance().getChildContext()
-  })
 
-  // shallow mount the child component with the context
-  return shallow(themeProvider.instance().props.children, { context: wrapper.instance().getChildContext(), childContextTypes: ThemeProvider.childContextTypes })
+  const { context, childContextTypes, ...rest} = options
+  const contextObj = {
+    ...wrapper.instance().getChildContext(),
+    ...context }
+  const childContextTypesObj = {
+    ...ThemeProvider.childContextTypes,
+    ...childContextTypes
+  }
+
+  return shallow(children, { context: contextObj, childContextTypes: childContextTypesObj, ...rest })
 }
 
 export function mountWithTheme (children, theme = {}, options = {}) {
@@ -27,12 +31,9 @@ export function mountWithTheme (children, theme = {}, options = {}) {
     </ThemeProvider>,
     options
   )
-  // Set the context and remount.
-  const themeProvider = wrapper.mount({
-    context: wrapper.instance().getChildContext()
-  })
 
   const { context, childContextTypes, ...rest} = options
+
   const contextObj = {
     ...wrapper.instance().getChildContext(),
     ...context }
@@ -40,7 +41,7 @@ export function mountWithTheme (children, theme = {}, options = {}) {
     ...ThemeProvider.childContextTypes,
     ...childContextTypes
   }
-  // console.log(contextObj, childContextTypes)
+
   // Mount the child component with the context
-  return mount(themeProvider.instance().props.children, { context: contextObj, childContextTypes: childContextTypesObj, ...rest })
+  return mount(children, { context: contextObj, childContextTypes: childContextTypesObj, ...rest })
 }
