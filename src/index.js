@@ -11,7 +11,7 @@ export function shallowWithTheme (children, theme = {}, options = {}) {
     options
   )
 
-  const { context, childContextTypes, ...rest} = options
+  const { context, childContextTypes, ...rest } = options
   const contextObj = {
     ...wrapper.instance().getChildContext(),
     ...context }
@@ -32,7 +32,7 @@ export function mountWithTheme (children, theme = {}, options = {}) {
     options
   )
 
-  const { context, childContextTypes, ...rest} = options
+  const { context, childContextTypes, ...rest } = options
 
   const contextObj = {
     ...wrapper.instance().getChildContext(),
