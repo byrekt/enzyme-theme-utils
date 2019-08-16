@@ -1,7 +1,7 @@
 {
   "name": "enzyme-theme-utils",
   "main": "dist/enzyme-theme-utils.js",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Enzyme Theme Utilities",
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/rollup/bin/rollup -c",
@@ -14,37 +14,33 @@
     "registry": "https://registry.npmjs.org/"
   },
   "license": "MIT",
-  "babel": {
-    "presets": [
-      "env",
-      "stage-0",
-      "react"
-    ]
-  },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "babel-jest": "^22.4.3",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^24.7.1",
     "babel-plugin-external-helpers": "^6.22.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "enzyme": "^3.1.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "jest": "^22.4.3",
-    "jest-styled-components": "^4.4.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "jest": "^24.9.0",
+    "jest-styled-components": "^6.3.3",
     "prop-types": "^15.6.1",
-    "react": "16.4.0",
-    "react-dom": "16.4.0",
+    "react": "16.8.0",
+    "react-dom": "16.8.0",
     "rimraf": "^2.6.1",
     "rollup": "^0.45.2",
-    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-includepaths": "^0.2.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "styled-components": "2.x.x"
   },
   "peerDependencies": {
-    "styled-components": ">=2.0.0 || <= 4.0.0",
-    "react": ">=15.2.0 || <= 16.4.0",
-    "enzyme": ">=3.1.0"
+    "styled-components": ">= 3.4.2",
+    "react": ">= 16.5.0",
+    "enzyme": ">=3.10.0"
   }
 }

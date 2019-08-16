@@ -8,87 +8,83 @@ var React = _interopDefault(require('react'));
 var enzyme = require('enzyme');
 var styledComponents = require('styled-components');
 
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
 
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(source, true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(source).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
     }
   }
 
   return target;
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-var objectWithoutProperties = function (obj, keys) {
-  var target = {};
-
-  for (var i in obj) {
-    if (keys.indexOf(i) >= 0) continue;
-    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
-    target[i] = obj[i];
-  }
-
-  return target;
-};
-
-function shallowWithTheme(children) {
-  var theme = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-  // shallow mount the component wrapped in a ThemeProvider
-  var wrapper = enzyme.shallow(React.createElement(
-    styledComponents.ThemeProvider,
-    { theme: theme },
-    children
-  ), options);
-  // Set the context and remount.
-  var themeProvider = wrapper.shallow({
-    context: wrapper.instance().getChildContext()
-  });
-
-  // shallow mount the child component with the context
-  return enzyme.shallow(themeProvider.instance().props.children, { context: wrapper.instance().getChildContext(), childContextTypes: styledComponents.ThemeProvider.childContextTypes });
 }
 
-function mountWithTheme(children) {
+function shallowWithTheme(tree) {
   var theme = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-  // Moun the component wrapped in a ThemeProvider
-  var wrapper = enzyme.mount(React.createElement(
-    styledComponents.ThemeProvider,
-    { theme: theme },
-    children
-  ), options);
-  // Set the context and remount.
-  var themeProvider = wrapper.mount({
-    context: wrapper.instance().getChildContext()
-  });
+  var WrappingThemeProvider = function WrappingThemeProvider(props) {
+    return React.createElement(styledComponents.ThemeProvider, {
+      theme: theme
+    }, props.children);
+  };
 
-  var context = options.context,
-      childContextTypes = options.childContextTypes,
-      rest = objectWithoutProperties(options, ['context', 'childContextTypes']);
+  return enzyme.shallow(tree, _objectSpread2({
+    wrappingComponent: WrappingThemeProvider
+  }, options));
+}
+function mountWithTheme(tree) {
+  var theme = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-  var contextObj = _extends({}, wrapper.instance().getChildContext(), context);
-  var childContextTypesObj = _extends({}, styledComponents.ThemeProvider.childContextTypes, childContextTypes);
-  // console.log(contextObj, childContextTypes)
-  // Mount the child component with the context
-  return enzyme.mount(themeProvider.instance().props.children, _extends({ context: contextObj, childContextTypes: childContextTypesObj }, rest));
+  var WrappingThemeProvider = function WrappingThemeProvider(props) {
+    return React.createElement(styledComponents.ThemeProvider, {
+      theme: theme
+    }, props.children);
+  }; // Mount the child component with the context
+
+
+  return enzyme.mount(tree, _objectSpread2({
+    wrappingComponent: WrappingThemeProvider
+  }, options));
 }
 
 exports.shallowWithTheme = shallowWithTheme;

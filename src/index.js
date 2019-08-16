@@ -2,46 +2,23 @@ import React from 'react'
 import { mount, shallow } from 'enzyme'
 import { ThemeProvider } from 'styled-components'
 
-export function shallowWithTheme (children, theme = {}, options = {}) {
-  // shallow mount the component wrapped in a ThemeProvider
-  const wrapper = shallow(
+export function shallowWithTheme (tree, theme = {}, options = {}) {
+  const WrappingThemeProvider = (props) => (
     <ThemeProvider theme={theme}>
-      {children}
-    </ThemeProvider>,
-    options
+      {props.children}
+    </ThemeProvider>
   )
 
-  const { context, childContextTypes, ...rest } = options
-  const contextObj = {
-    ...wrapper.instance().getChildContext(),
-    ...context }
-  const childContextTypesObj = {
-    ...ThemeProvider.childContextTypes,
-    ...childContextTypes
-  }
-
-  return shallow(children, { context: contextObj, childContextTypes: childContextTypesObj, ...rest })
+  return shallow(tree, { wrappingComponent: WrappingThemeProvider, ...options })
 }
 
-export function mountWithTheme (children, theme = {}, options = {}) {
-  // Moun the component wrapped in a ThemeProvider
-  const wrapper = mount(
+export function mountWithTheme (tree, theme = {}, options = {}) {
+  const WrappingThemeProvider = (props) => (
     <ThemeProvider theme={theme}>
-      {children}
-    </ThemeProvider>,
-    options
+      {props.children}
+    </ThemeProvider>
   )
 
-  const { context, childContextTypes, ...rest } = options
-
-  const contextObj = {
-    ...wrapper.instance().getChildContext(),
-    ...context }
-  const childContextTypesObj = {
-    ...ThemeProvider.childContextTypes,
-    ...childContextTypes
-  }
-
   // Mount the child component with the context
-  return mount(children, { context: contextObj, childContextTypes: childContextTypesObj, ...rest })
+  return mount(tree, { wrappingComponent: WrappingThemeProvider, ...options })
 }

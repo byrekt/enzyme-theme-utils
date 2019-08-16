@@ -8,9 +8,14 @@ export default {
   plugins: [
     // resolve(),
     babel({
-      'presets': [['es2015', {'modules': false}], 'stage-0', 'react'],
-      'plugins': ['external-helpers'],
-      'exclude': 'node_modules/**'
+      presets: [
+        '@babel/preset-env',
+        '@babel/preset-react'
+      ],
+      plugins: [
+        '@babel/plugin-proposal-object-rest-spread',
+        '@babel/plugin-proposal-class-properties'
+      ]
     }),
     includePaths({
       include: {},

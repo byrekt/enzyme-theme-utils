@@ -1,33 +1,10 @@
 {
-  "env": {
-    "test": {
-      "presets": [
-        "env",
-        "stage-0",
-        "react"
-      ]
-    },
-    "rollup": {
-      "presets": [
-        [
-          "env",
-          {
-            "modules": false
-          }
-        ],
-        "stage-0",
-        "react"
-      ]
-    },
-    "production": {
-      "presets": [
-        "env",
-        "stage-0",
-        "react"
-      ],
-      "ignore": [
-        "**/*.spec.js"
-      ]
-    }
-  }
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-class-properties"
+  ]
 }
